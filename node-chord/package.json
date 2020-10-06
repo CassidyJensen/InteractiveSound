@@ -1,0 +1,15 @@
+{
+  "name": "chord",
+  "version": "1.0.0",
+  "description": "Chord sniffer",
+  "main": "chordal.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cassidy Jensen",
+  "license": "ISC",
+  "dependencies": {
+    "tonal": "^2.2.2",
+    "tonal-detect": "^2.2.2"
+  }
+}
