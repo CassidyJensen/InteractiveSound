@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello Tone js</title>
+  </head>
+
+  <body>
+
+    <button>z</button>
+
+
+    <script src="js/Tone.js"></script>
+    <script>
+      console.log('js is working');
+
+      Tone.start();
+
+      //create a synth and connect it to the master output (Speakers)
+      var synth = new Tone.Synth().toMaster();
+      //sawtooth, sine? , triangle?
+      synth.oscillator.type = "square";
+
+      //play a middle 'C' for the duration of an 8th note
+      // synth.triggerAttackRelease("C3", '8n'); //2n, 4n etc or 3s (3 seconds) (2s, etc)
+
+      // attach a click listener to a play button
+      document.querySelector('button').addEventListener('click', () =>  synth.triggerAttackRelease("C3", '8n'));
+
+    </script>
+
+
+  </body>
+</html>

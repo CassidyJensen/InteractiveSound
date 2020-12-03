@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+      .container {
+        display: flex;
+        border: 5px solid black;
+        height: 205px;
+      }
+      .note{
+        height: 100%;
+        width: 100%;
+        background: white;
+        border-right: 1px solid black;
+        cursor: pointer;
+      }
+      .note:hover{
+        background: rgba(255, 0, 0, .5);
+        border-right: 5px solid black;
+        border-left: 3px solid white;
+      }
+    </style>
+    <title>Hello Tone js</title>
+  </head>
+
+  <body>
+
+    <label for="attack">Attack:</label>
+  <input type="number" value=".1" id="attack" name="attack">
+  <label for="decay">Decay:</label>
+  <input type="number" value=".1" id="decay" name="decay">
+  <label for="sustain">Sustain:</label>
+  <input type="number" value=".1" id="sustain" name="sustain">
+  <label for="release">Release:</label>
+  <input type="number" value=".1" id="release" name="release">
+  <button id="envUpdate">Update Envelope</button>
+
+    <div class='container'>
+
+      <button class='note' id="first">Audio Start</button>
+      <button class='note' id="envOn">Envelope On</button>
+      <button class='note' id="envOff">Envelope Off</button>
+
+
+
+    </div>
+    <div class='container'>
+      <button class='note' id="hot">Hot</button>
+      <button class='note' id="cross">Cross</button>
+      <button class='note' id="buns">Buns</button>
+    </div>
+
+    <div class='container'>
+      <button class='note' id="A4">A4</button>
+      <button class='note' id="B4">B4</button>
+      <button class='note' id="C4">C4</button>
+      <button class='note' id="D4">D4</button>
+      <button class='note' id="E4">E4</button>
+      <button class='note' id="F4">F4</button>
+      <button class='note' id="G4">G4</button>
+    </div>
+
+
+    <script src="js/Tone.js"></script>
+    <script>
+      console.log('js is working');
+      //also works
+      // document.querySelector('#second');
+      var env = new Tone.Envelope({
+        attack: 0.3,
+        decay: 0.6,
+        sustain: 0.5,
+        release: 0.2,
+      }).toDestination();
+
+      const crusher = new Tone.BitCrusher(4).toDestination();
+      const bitSynth = new Tone.Synth().connect(crusher);
+      // env.triggerAttackRelease(0.5);
+
+      document.getElementById('envUpdate')?.addEventListener('click', async () => {
+        env = new Tone.Envelope({
+          attack: document.getElementById("attack").value,
+          decay: document.getElementById("decay").value,
+          sustain: document.getElementById("sustain").value,
+          release: document.getElementById("release").value,
+        }).toDestination();
+        env.triggerAttack();
+      })
+
+      document.getElementById('envOn')?.addEventListener('click', async () => {
+      	env.triggerAttack();
+      })
+      document.getElementById('envOff')?.addEventListener('click', async () => {
+        env.triggerRelease();
+      })
+
+      document.getElementById('hot')?.addEventListener('click', async () => {
+        const synth = new Tone.Synth().toDestination();
+        const now = Tone.now()
+        synth.triggerAttackRelease("B4", "2n", now)
+        synth.triggerAttackRelease("A4", "2n", now + .5)
+        synth.triggerAttackRelease("G4", "2n", now + 1)
+      })
+
+      document.getElementById('cross')?.addEventListener('click', async () => {
+        const synth = new Tone.Synth().toDestination();
+        const now = Tone.now()
+        synth.triggerAttackRelease("G4", "4n", now)
+        synth.triggerAttackRelease("G4", "4n", now + .25)
+        synth.triggerAttackRelease("G4", "4n", now + 5)
+        synth.triggerAttackRelease("G4", "4n", now + .75)
+      })
+      document.getElementById('buns')?.addEventListener('click', async () => {
+        const synth = new Tone.Synth().toDestination();
+        const now = Tone.now()
+        synth.triggerAttackRelease("A4", "4n", now)
+        synth.triggerAttackRelease("A4", "4n", now + .25)
+        synth.triggerAttackRelease("A4", "4n", now + .5)
+        synth.triggerAttackRelease("A4", "4n", now + .75)
+      })
+
+      document.querySelector('#first')?.addEventListener('click', async () => {
+  	     await Tone.start()
+          const sampler = new Tone.Sampler({
+          	urls: {
+          		"C4": "C4.mp3",
+          		"D#4": "Ds4.mp3",
+          		"F#4": "Fs4.mp3",
+          		"A4": "A4.mp3",
+          	},
+          	release: 1,
+          	baseUrl: "https://tonejs.github.io/audio/salamander/",
+          }).toDestination();
+
+          const filter = new Tone.Filter(400, 'lowpass').toDestination();
+          const feedbackDelay = new Tone.FeedbackDelay(0.125, 0.5).toDestination();
+
+          sampler.connect(filter);
+          sampler.connect(feedbackDelay);
+
+
+          Tone.loaded().then(() => {
+          	sampler.triggerAttackRelease(["Eb4", "G4", "Bb4"], 4);
+          })
+      })
+
+      document.getElementById('C4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("C4", .5);
+      })
+      document.getElementById('A4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("A4", .5);
+      })
+      document.getElementById('B4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("B4", .5);
+      })
+      document.getElementById('D4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("D4", .5);
+      })
+      document.getElementById('E4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("E4", .5);
+      })
+      document.getElementById('F4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("F4", .5);
+      })
+      document.getElementById('G4')?.addEventListener('click', async () => {
+        bitSynth.triggerAttackRelease("G4", .5);
+      })
+
+
+    </script>
+
+
+  </body>
+</html>

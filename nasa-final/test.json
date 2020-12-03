@@ -1,0 +1,56 @@
+{
+  "links":
+    {"self":"http://www.neowsapp.com/rest/v1/neo/3542519?api_key=DEMO_KEY"},
+  "id":"3542519",
+  "neo_reference_id":"3542519",
+  "name":"(2010 PK9)",
+  "designation":"2010 PK9",
+  "nasa_jpl_url":"http://ssd.jpl.nasa.gov/sbdb.cgi?sstr=3542519",
+  "absolute_magnitude_h":21.8,
+  "estimated_diameter":
+    {"kilometers":
+      {"estimated_diameter_min":0.1160259082,
+      "estimated_diameter_max":0.2594418179},
+    "meters":
+      {"estimated_diameter_min":116.0259082094,
+      "estimated_diameter_max":259.4418179074},
+    "miles":
+      {"estimated_diameter_min":0.0720951346,
+        "estimated_diameter_max":0.1612096218},
+    "feet":
+      {"estimated_diameter_min":380.6624406898,
+        "estimated_diameter_max":851.1870938635}
+    },
+  "is_potentially_hazardous_asteroid":true,
+  "close_approach_data":[],
+  "orbital_data":
+    {"orbit_id":"23",
+      "orbit_determination_date":"2019-08-14 05:33:29",
+      "first_observation_date":"2010-08-05",
+      "last_observation_date":"2019-08-04",
+      "data_arc_in_days":3286,
+      "observations_used":100,
+      "orbit_uncertainty":"0",
+      "minimum_orbit_intersection":".0160944",
+      "jupiter_tisserand_invariant":"8.149",
+      "epoch_osculation":"2459000.5",
+      "eccentricity":".6758647855973007",
+      "semi_major_axis":".6820991436904377",
+      "inclination":"12.5937477962068",
+      "ascending_node_longitude":"306.5383736889956",
+      "orbital_period":"205.7641371355473",
+      "perihelion_distance":".2210923521839976",
+      "perihelion_argument":"195.6183203607214",
+      "aphelion_distance":"1.143105935196878",
+      "perihelion_time":"2459037.634590091654",
+      "mean_anomaly":"295.0302116826658",
+      "mean_motion":"1.74957601947345",
+      "equinox":"J2000",
+      "orbit_class":
+      {"orbit_class_type":"ATE",
+        "orbit_class_description":"Near-Earth asteroid orbits similar to that of 2062 Aten",
+        "orbit_class_range":"a (semi-major axis) < 1.0 AU; q (perihelion) > 0.983 AU"
+      }
+    },
+  "is_sentry_object":false
+}
